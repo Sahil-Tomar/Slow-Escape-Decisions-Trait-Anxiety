@@ -19,7 +19,7 @@ def display_text(text, size, position, color=(255, 255, 255)):
 
 # Intro page function
 def intro_page():
-    background = pygame.image.load('pygame/bg2-final.jpg')
+    background = pygame.image.load('bg2-final.jpg')
 
     intro_running = True
     while intro_running:
@@ -41,7 +41,7 @@ def intro_page():
 
 # Instruction page function
 def instruction_page():
-    background = pygame.image.load('pygame/instbg-final.jpg')
+    background = pygame.image.load('instbg-final.jpg')
 
     instruction_running = True
     while instruction_running:
@@ -64,7 +64,7 @@ def instruction_page():
                     quit()
                     
 def gameover_page():
-    background = pygame.image.load('pygame/game-over-final.jpg')
+    background = pygame.image.load('game-over-final.jpg')
 
     intro_running = True
     start_time = time.time()  # Record intro start time
@@ -90,7 +90,7 @@ def gameover_page():
 # Trail page function
 # Trail page function
 def trail_page():
-    background = pygame.image.load('pygame/back (1).jpg')
+    background = pygame.image.load('back (1).jpg')
     font = pygame.font.Font(None, 36)
     for i in range(5):
         acceleration_boosted = False  # Initialize acceleration_boosted
@@ -178,7 +178,7 @@ def main_game():
     except FileNotFoundError:
         df = pd.DataFrame(columns=['economic_score', 'fail_count', 'flee_distance', 'speed', 'boost_flag'])
     
-    background = pygame.image.load('pygame/back (1).jpg')
+    background = pygame.image.load('back (1).jpg')
     font = pygame.font.Font(None, 36)
     
     result_dfs = []
@@ -287,11 +287,11 @@ def main_game():
 
 # Player and enemy functions
 def player(x, y):
-    player_img = pygame.image.load('pygame/car.png')
+    player_img = pygame.image.load('car.png')
     screen.blit(player_img, (x, y))
 
 def enemy(x, y):
-    enemy_img = pygame.image.load('pygame/enemy-car.png')
+    enemy_img = pygame.image.load('enemy-car.png')
     screen.blit(enemy_img, (x, y))
 
 def main():
