@@ -207,7 +207,7 @@ def main_game():
     font = pygame.font.Font(None, 36)
     
     result_dfs = []
-    for i in range(10):
+    for i in range(30):
         acceleration_boosted = False  # Initialize acceleration_boosted
         playerX = 720
         playerY = 450
