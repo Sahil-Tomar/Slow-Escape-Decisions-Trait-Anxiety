@@ -264,7 +264,7 @@ def main_game():
             if enemy_change:
                 simulate_speed()
                 speed = enemy_change
-                if speed >= 0.04 and speed <= 0.09:
+                if speed==0.01 and speed >= 0.04 and speed <= 0.09:
                     threat="slow"
                 elif speed >= 0.091 and speed <= 0.2:
                     threat="medium"
@@ -303,7 +303,7 @@ def main_game():
     df = pd.concat(result_dfs, ignore_index=True)
 
     # Save DataFrame to CSV file
-    df.to_csv('Praveen_Raj.csv', index=False)
+    df.to_csv('Naman_Goyal.csv', index=False)
         
 
 # Player and enemy functions
