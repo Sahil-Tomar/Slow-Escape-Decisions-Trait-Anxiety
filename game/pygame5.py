@@ -254,7 +254,7 @@ def main_game():
                     if event.key == pygame.K_SPACE and gpressed:
                         speed = enemy_change
                         enemy_change = 0
-                        fid = playerX - (enemyX+64)
+                        fid = playerX - (enemyX+20)
                         money = 10000 / fid
                         running = False
 
@@ -274,7 +274,7 @@ def main_game():
             
 
             # Collision detection
-            if enemyX >= playerX - 60:
+            if enemyX >= playerX - 64:
                 enemy_change = 0
                 fid = 0
                 money = 0
@@ -303,7 +303,7 @@ def main_game():
     df = pd.concat(result_dfs, ignore_index=True)
 
     # Save DataFrame to CSV file
-    df.to_csv('results2.csv', index=False)
+    df.to_csv('Praveen_Raj.csv', index=False)
         
 
 # Player and enemy functions
