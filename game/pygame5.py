@@ -2,6 +2,7 @@ import pygame
 import random
 import pandas as pd
 import time
+import numpy as np
 # Initialize pygame
 pygame.init()
 
@@ -103,7 +104,11 @@ def trail_page():
         acceleration_probability = 0.00013
         gpressed=False
         beforeg=True
-
+        flag=False
+        def mean(a,b):
+            return (a+b)/2
+        def std(a,b):
+            return (b-a)/4
         def simulate_speed():
             nonlocal acceleration_boosted
             nonlocal enemyX
@@ -112,7 +117,15 @@ def trail_page():
             enemyX += enemy_change
             
             if not acceleration_boosted and random.random() < acceleration_probability:
-                acceleration_boost = random.uniform(0.03, 0.3)
+                # slow = random.uniform(0.04, 0.09)
+                slow = np.random.normal(mean(0.04,0.09), std(0.04,0.09))
+                # medium = random.uniform(0.091, 0.2)
+                medium = np.random.normal(mean(0.091,0.2), std(0.091,0.2))
+                # fast = random.uniform(0.21, 0.35)
+                fast = np.random.normal(mean(0.21,0.35), std(0.21,0.35))
+
+                acceleration_boost = random.choice([slow,medium,fast])
+                
                 enemy_change = acceleration_boost
                 enemyX += enemy_change
                 acceleration_boosted = True
@@ -139,10 +152,11 @@ def trail_page():
                         beforeg=False
                     if event.key == pygame.K_SPACE and gpressed:
                         speed = enemy_change
-                        enemy_change = 0
+                        # enemy_change = 0
                         fid = playerX - (enemyX+64)
-                        money = 1000 / fid
-                        running = False
+                        money = 10000 / fid
+                        flag=True
+                        # running = False
                         
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
@@ -153,18 +167,28 @@ def trail_page():
             
             if enemy_change:
                 simulate_speed()
-                
-            speed = enemy_change
+                speed = enemy_change
+            
+            if flag:
+                playerX +=0.05
+                # enemyX += enemy_change
 
+            if enemyX >=800-64:
+                running=False
+                enemyX=800-64
+                
             # Collision detection
-            if enemyX >= playerX - 50:
+            if playerX-enemyX <= 64:
                 enemy_change = 0
-                fid = 0
+                # fid = 0
                 money = 0
                 crash_count = 1
                 print("Crash")
                 running = False
                 gameover_page()
+                
+            if playerX>=800:
+                running=False    
 
             # Draw player and enemy
             player(playerX, playerY)
@@ -183,7 +207,7 @@ def main_game():
     font = pygame.font.Font(None, 36)
     
     result_dfs = []
-    for i in range(30):
+    for i in range(10):
         acceleration_boosted = False  # Initialize acceleration_boosted
         playerX = 720
         playerY = 450
@@ -196,32 +220,41 @@ def main_game():
         crash_count = 0    
         speed=0.01
         initial_distance = playerX - (enemyX+64)
+        speed_flag=False
         # print(initial_distance)
         gpressed=False
         beforeg=True
         boost_distance=0
         threat=""
-
+        flag=False
+        def mean(a,b):
+            return (a+b)/2
+        def std(a,b):
+            return (b-a)/4
         def simulate_speed():
             nonlocal acceleration_boosted
             nonlocal enemyX
             nonlocal enemy_change
             nonlocal speed
             nonlocal boost_distance
+            nonlocal speed_flag
 
             enemyX += enemy_change
             
             if not acceleration_boosted and random.random() < acceleration_probability:
                 
-                slow = random.uniform(0.04, 0.09)
-                medium = random.uniform(0.091, 0.2)
-                fast = random.uniform(0.21, 0.35)
+                # slow = random.uniform(0.04, 0.09)
+                slow = np.random.normal(mean(0.04,0.09), std(0.04,0.09))
+                # medium = random.uniform(0.091, 0.2)
+                medium = np.random.normal(mean(0.091,0.2), std(0.091,0.2))
+                # fast = random.uniform(0.21, 0.35)
+                fast = np.random.normal(mean(0.21,0.35), std(0.21,0.35))
 
                 acceleration_boost = random.choice([slow,medium,fast])
-                
+                speed_flag=True
                 enemy_change = acceleration_boost
                 speed=enemy_change
-                boost_distance=playerX-(enemyX+20)
+                boost_distance=720-(enemyX+64)
                 
                 enemyX =enemyX + enemy_change
                 acceleration_boosted = True
@@ -253,35 +286,53 @@ def main_game():
                         quit()    
                     if event.key == pygame.K_SPACE and gpressed:
                         speed = enemy_change
-                        enemy_change = 0
-                        fid = playerX - (enemyX+20)
+                        # enemy_change = 0
+                        fid = 720 - (enemyX+64)
                         money = 10000 / fid
-                        running = False
+                        flag=True
+                        # running = False
+                        # playerX +=0.02
+                        
 
             # Enemy movement
             enemyX += enemy_change
             
-            if enemy_change:
+            
+            if enemy_change and speed_flag==False:
                 simulate_speed()
                 speed = enemy_change
-                if speed==0.01 and speed >= 0.04 and speed <= 0.09:
+                if speed >= 0.04 and speed <= 0.09:
                     threat="slow"
                 elif speed >= 0.091 and speed <= 0.2:
                     threat="medium"
                 elif speed >= 0.21 and speed <= 0.35:
-                    threat="fast"        
+                    threat="fast"
+                elif speed==0.01:
+                    threat="slow"            
                 # boost_distance=playerX-boost_distance
             
+            if flag:
+                playerX +=0.05
+                # enemyX += enemy_change
 
+            if enemyX >=800-64:
+                running=False
+                enemyX=800-64
+                
+                
+            
             # Collision detection
-            if enemyX >= playerX - 64:
+            if playerX-enemyX <= 64:
                 enemy_change = 0
-                fid = 0
+                # fid = 0
                 money = 0
                 crash_count = 1
                 print("Crash")
                 running = False
                 gameover_page()
+                
+            if playerX>=800:
+                running=False    
 
             # Draw player and enemy
             player(playerX, playerY)
