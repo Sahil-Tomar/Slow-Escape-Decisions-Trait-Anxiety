@@ -49,7 +49,7 @@ def instruction_page():
         display_text("Instructions", 70, (400, 100))
         display_text("Use 'f' to start the game.", 40, (400, 250))
         display_text("Use 'SPACE' to avoid the crash.", 40, (400, 300))
-        display_text("Avoid crashing, it earns 0 points.", 40, (400, 350))
+        display_text("Avoid crashing, crashing earns 0 points.", 40, (400, 350))
         display_text("Avoid crashing as late as possible to earn max. rewards", 40, (400, 400))
         display_text("Press Enter to Play", 50, (400, 450))
         display_text("Press Esc to Quit", 40, (400, 500))
@@ -221,7 +221,7 @@ def main_game():
                 
                 enemy_change = acceleration_boost
                 speed=enemy_change
-                boost_distance=playerX-(enemyX+64)
+                boost_distance=playerX-(enemyX+20)
                 
                 enemyX =enemyX + enemy_change
                 acceleration_boosted = True
