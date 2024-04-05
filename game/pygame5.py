@@ -105,12 +105,12 @@ def trail_page():
         gpressed=False
         beforeg=True
         flag=False
-        s_l=0.06
-        s_r=0.085
-        m_l=0.12
-        m_r=0.15
-        f_l=0.161
-        f_r=0.21
+        s_l=0.05
+        s_r=0.075
+        m_l=0.09
+        m_r=0.11
+        f_l=0.12
+        f_r=0.14
         
         def mean(a,b):
             return (a+b)/2
@@ -220,7 +220,7 @@ def main_game():
     font = pygame.font.Font(None, 36)
     earn=0
     result_dfs = []
-    for i in range(30):
+    for i in range(15):
         acceleration_boosted = False  # Initialize acceleration_boosted
         playerX = 720
         playerY = 450
@@ -242,12 +242,12 @@ def main_game():
         boost_distance=0
         threat=""
         flag=False
-        s_l=0.06
-        s_r=0.085
-        m_l=0.12
-        m_r=0.15
-        f_l=0.161
-        f_r=0.21
+        s_l=0.05
+        s_r=0.08
+        m_l=0.125
+        m_r=0.155
+        f_l=0.171
+        f_r=0.22
         
         def mean(a,b):
             return (a+b)/2
@@ -286,7 +286,7 @@ def main_game():
                 speed_flag=True
                 enemy_change = acceleration_boost
                 speed=enemy_change
-                boost_distance=720-(enemyX+64)
+                boost_distance=enemyX+64
                 
                 enemyX =enemyX + enemy_change
                 acceleration_boosted = True
@@ -302,7 +302,7 @@ def main_game():
             screen.blit(score_text, (680, 10))  # Blit score text onto the screen
             text= font.render("Main Game",True,(0,0,0))
             screen.blit(text, (320, 10))
-            money_text= font.render("Money: "+str(round(earn,2)),True,(0,0,0))
+            money_text= font.render("Score: "+str(round(earn,2)),True,(0,0,0))
             screen.blit(money_text, (50, 10))
 
             # Event handling
@@ -336,11 +336,11 @@ def main_game():
             if enemy_change and speed_flag==False:
                 simulate_speed()
                 speed = enemy_change
-                if speed >= s_l-1 and speed <= s_r+1:
+                if speed >= s_l-0.005 and speed <= s_r+0.005:
                     threat="slow"
-                elif speed >= m_l-1 and speed <= m_r+1:
+                elif speed >= m_l-0.005 and speed <= m_r+0.005:
                     threat="medium"
-                elif speed >= f_l-1 and speed <= f_r+1:
+                elif speed >= f_l-0.005 and speed <= f_r+0.005:
                     threat="fast"
                 elif speed==0.02:
                     threat="slow"            
@@ -409,7 +409,7 @@ def enemy(x, y):
 def main():
     intro_page()
     instruction_page()
-    trail_page()
+    # trail_page()
     instruction_page()
     main_game()
     
