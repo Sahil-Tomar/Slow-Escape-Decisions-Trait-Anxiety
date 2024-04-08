@@ -409,7 +409,7 @@ def enemy(x, y):
 def main():
     intro_page()
     instruction_page()
-    # trail_page()
+    trail_page()
     instruction_page()
     main_game()
     
