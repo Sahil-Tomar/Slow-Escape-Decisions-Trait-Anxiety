@@ -220,7 +220,7 @@ def main_game():
     font = pygame.font.Font(None, 36)
     earn=0
     result_dfs = []
-    for i in range(1):
+    for i in range(50):
         acceleration_boosted = False  # Initialize acceleration_boosted
         playerX = 720
         playerY = 450
@@ -409,8 +409,8 @@ def enemy(x, y):
 def main():
     intro_page()
     instruction_page()
-    # trail_page()
-    # instruction_page()
+    trail_page()
+    instruction_page()
     main_game()
     
 
