@@ -1,11 +1,11 @@
-# BSE-662-game
+# Slow Escape Decisions are swayed by trait-anxiety
 To download required python packages ,go to command prompt and type to download:
 -  pip install pandas
 -  pip install pygame
 
 
 Download the game folder or clone it by:
--  git clone https://github.com/Sujallalawat/BSE-662-game
+-  git clone [https://github.com/Sujallalawat/BSE-662-game](https://github.com/Sahil-Tomar/Slow-Escape-Decisions-Trait-Anxiety)
 -  on gitbash terminal
   
 To run the python game just follow the commands:
